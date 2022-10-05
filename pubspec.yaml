@@ -1,6 +1,6 @@
 name: ephemeral_state_manager
-description: A package é um gerenciamento de estado efêmero simples e objetivo (é um estado temporário de uma widget), com essa package é possível usar o setState ou streamCotroller de forma segura indicando onde deve ser feito a build do widget multável sem re-buildar toda árvore de widget da página ativa exatamente como a documentação da framework recomenda.
-version: 1.0.0
+description: Package simplificado para gerenciamento de estado efêmoro para widgets
+version: 1.0.2
 homepage: https://github.com/Suebersson/ephemeral_state_manager
 
 environment:

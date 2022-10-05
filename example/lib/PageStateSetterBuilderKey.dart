@@ -3,15 +3,18 @@ import 'package:ephemeral_state_manager/src/stateSetterBuilderKey.dart';
 import 'PageValueStream.dart';
 
 class PageStateSetterBuilderKey extends StatelessWidget {
-  const PageStateSetterBuilderKey({Key? key, required this.controller}) : super(key: key);
-  
+  const PageStateSetterBuilderKey({Key? key, required this.controller})
+      : super(key: key);
+
   final PageStateSetterBuilderKeyController controller;
 
   @override
   Widget build(BuildContext context) {
     print('Create HomaPage build');
     return Scaffold(
-      appBar: AppBar(title: const Text('PageStateSetterBuilderKey: usando setState')),
+      appBar: AppBar(
+        title: const Text('PageStateSetterBuilderKey: usando setState'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -19,13 +22,14 @@ class PageStateSetterBuilderKey extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                icon: const Icon(Icons.exposure_neg_1, size: 45.0, color: Colors.red), 
+                icon: const Icon(Icons.exposure_neg_1,
+                    size: 45.0, color: Colors.red),
                 onPressed: controller.decrement,
               ),
               StateSetterBuilderKey<PageStateSetterBuilderKeyController>(
                 objectInstance: controller,
                 stateSetterKey: "counter",
-                builder: (context, object){
+                builder: (context, object) {
                   print('Upadate key: counter');
                   return Text(
                     '${object.counter}',
@@ -35,13 +39,14 @@ class PageStateSetterBuilderKey extends StatelessWidget {
                 }
               ),
               IconButton(
-                icon: const Icon(Icons.exposure_plus_1, size: 45.0, color: Colors.red), 
+                icon: const Icon(Icons.exposure_plus_1,
+                    size: 45.0, color: Colors.red),
                 onPressed: controller.increment,
               ),
             ],
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
@@ -57,10 +62,7 @@ class PageStateSetterBuilderKey extends StatelessWidget {
               width: 300,
               child: const Text(
                 'PageValueStream',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
           ),
@@ -70,12 +72,12 @@ class PageStateSetterBuilderKey extends StatelessWidget {
   }
 }
 
-class PageStateSetterBuilderKeyController extends StateSetterValues{
-
+class PageStateSetterBuilderKeyController extends StateSetterValues {
   int counter = 0;
-  
-  void increment() => super.updateValue(stateSetterKey: "counter", data: counter++);
-  
-  void decrement() => super.updateValue(stateSetterKey: "counter", data: counter--);
 
+  void increment() =>
+      super.updateValue(stateSetterKey: "counter", data: counter++);
+
+  void decrement() =>
+      super.updateValue(stateSetterKey: "counter", data: counter--);
 }

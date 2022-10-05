@@ -3,15 +3,18 @@ import 'package:ephemeral_state_manager/src/stateSetterBuilder.dart';
 import 'PageStateSetterBuilderKey.dart';
 
 class PageStateSetterBuilder extends StatelessWidget {
-  const PageStateSetterBuilder({Key? key, required this.controller}) : super(key: key);
-  
-  final  PageStateSetterBuilderController controller;
+  const PageStateSetterBuilder({Key? key, required this.controller})
+      : super(key: key);
+
+  final PageStateSetterBuilderController controller;
 
   @override
   Widget build(BuildContext context) {
     print('Create HomaPage build');
     return Scaffold(
-      appBar: AppBar(title: const Text('PageStateSetterBuilder: usando setState')),
+      appBar: AppBar(
+        title: const Text('PageStateSetterBuilder: usando setState'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -19,33 +22,34 @@ class PageStateSetterBuilder extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                icon: const Icon(Icons.exposure_neg_1, size: 45.0, color: Colors.red), 
+                icon: const Icon(Icons.exposure_neg_1,
+                    size: 45.0, color: Colors.red),
                 onPressed: controller.decrement,
               ),
               StateSetterBuilder<int>(
-                valueStateSetter: controller.counter,
-                builder: (context, value){
-                  print('Upadate: counter');
-                  return Text(
-                    '$value',
-                    style: Theme.of(context).textTheme.headline4,
-                  );
-                }
-              ),
+                  valueStateSetter: controller.counter,
+                  builder: (context, value) {
+                    print('Upadate: counter');
+                    return Text(
+                      '$value',
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  }
+                ),
               IconButton(
-                icon: const Icon(Icons.exposure_plus_1, size: 45.0, color: Colors.red), 
+                icon: const Icon(Icons.exposure_plus_1,
+                    size: 45.0, color: Colors.red),
                 onPressed: controller.increment,
               ),
             ],
           ),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) {
                   return PageStateSetterBuilderKey(
-                    controller: PageStateSetterBuilderKeyController()
-                  );
+                      controller: PageStateSetterBuilderKeyController());
                 }),
               );
             },
@@ -57,10 +61,7 @@ class PageStateSetterBuilder extends StatelessWidget {
               width: 300,
               child: const Text(
                 'StateSetterBuilderKey',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             ),
           ),
@@ -71,11 +72,9 @@ class PageStateSetterBuilder extends StatelessWidget {
 }
 
 class PageStateSetterBuilderController {
-
   final ValueState<int> counter = ValueState<int>(0);
 
   void increment() => counter.value++;
 
   void decrement() => counter.value--;
-
 }

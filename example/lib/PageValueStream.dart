@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ephemeral_state_manager/src/valueStream.dart';
+import './pageValueStreamWillPopScope.dart';
 
 class PageValueStream extends StatefulWidget {
   const PageValueStream({Key? key}) : super(key: key);
@@ -9,9 +10,8 @@ class PageValueStream extends StatefulWidget {
 }
 
 class _HomePageState extends State<PageValueStream> {
-
   final PageValueStreamController controller = PageValueStreamController();
-  
+
   @override
   void dispose() {
     controller.dispose();
@@ -22,45 +22,74 @@ class _HomePageState extends State<PageValueStream> {
   Widget build(BuildContext context) {
     print('Create HomaPage build');
     return Scaffold(
-      appBar: AppBar(title: const Text('PageValueStream: usando StreamController')),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.exposure_neg_1, size: 45.0, color: Colors.red), 
-              onPressed: controller.decrementCounter,
+      appBar: AppBar(
+        title: const Text('PageValueStream: usando StreamController'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.exposure_neg_1,
+                  size: 45.0,
+                  color: Colors.red,
+                ),
+                onPressed: controller.decrementCounter,
+              ),
+              StreamBuilder<int>(
+                stream: controller.counter.stream,
+                initialData: controller.counter.value,
+                builder: (context, snapshot) {
+                  print('Upadate: ${snapshot.data}');
+                  return Text(
+                    '${snapshot.data}',
+                    style: Theme.of(context).textTheme.headline4,
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.exposure_plus_1,
+                    size: 45.0, color: Colors.red),
+                onPressed: controller.incrementCounter,
+              ),
+            ],
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  return PageValueStreamWillPopScope(controller: PageValueStreamWillPopScopeController());
+                }),
+              );
+            },
+            child: Container(
+              alignment: Alignment.center,
+              color: Theme.of(context).primaryColor,
+              margin: const EdgeInsets.only(top: 60),
+              height: 50,
+              width: 300,
+              child: const Text(
+                'PageValueStreamWillPopScope',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
             ),
-            StreamBuilder<int>(
-              stream: controller.counter.stream,
-              initialData: controller.counter.value,
-              builder: (context, snapshot){
-                print('Upadate: ${snapshot.data}');
-                return Text(
-                  '${snapshot.data}',
-                  style: Theme.of(context).textTheme.headline4,
-                );
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.exposure_plus_1, size: 45.0, color: Colors.red), 
-              onPressed: controller.incrementCounter,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class PageValueStreamController implements DisposeValueStream{
-
-  ValueStream<int> counter = ValueStream<int>(0);
+class PageValueStreamController implements DisposeValueStream {
+  final ValueStream<int> counter = ValueStream<int>(0);
 
   void incrementCounter() => counter.value++;
   void decrementCounter() => counter.value--;
 
   @override
   void dispose() => counter.dispose();
-
 }
