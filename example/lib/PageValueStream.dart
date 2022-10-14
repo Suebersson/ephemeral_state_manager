@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ephemeral_state_manager/src/valueStream.dart';
+import 'package:ephemeral_state_manager/ephemeral_state_manager.dart';
+
 import './pageValueStreamWillPopScope.dart';
 
 class PageValueStream extends StatefulWidget {
@@ -84,8 +85,8 @@ class _HomePageState extends State<PageValueStream> {
   }
 }
 
-class PageValueStreamController implements DisposeValueStream {
-  final ValueStream<int> counter = ValueStream<int>(0);
+class PageValueStreamController implements DisposeValuesStream {
+  final ValuesStream<int> counter = ValuesStream<int>(0);
 
   void incrementCounter() => counter.value++;
   void decrementCounter() => counter.value--;

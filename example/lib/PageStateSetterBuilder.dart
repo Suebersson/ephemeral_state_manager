@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ephemeral_state_manager/src/stateSetterBuilder.dart';
+import 'package:ephemeral_state_manager/ephemeral_state_manager.dart';
 import 'PageStateSetterBuilderKey.dart';
 
 class PageStateSetterBuilder extends StatelessWidget {

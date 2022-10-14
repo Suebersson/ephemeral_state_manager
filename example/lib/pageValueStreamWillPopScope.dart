@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ephemeral_state_manager/src/valueStream.dart';
-
+import 'package:ephemeral_state_manager/ephemeral_state_manager.dart';
 
 /// Exemplo de uma página que discarta[dispose] a controller[Stream] sem usar uma [StatefulWidget]
 /// basta usar o widget [WillPopScope]
@@ -71,8 +70,8 @@ class PageValueStreamWillPopScope extends StatelessWidget {
   }
 }
 
-class PageValueStreamWillPopScopeController implements DisposeValueStream {
-  final ValueStream<int> counter = ValueStream<int>(0);
+class PageValueStreamWillPopScopeController implements DisposeValuesStream {
+  final ValuesStream<int> counter = ValuesStream<int>(0);
 
   void incrementCounter() => counter.value++;
   void decrementCounter() => counter.value--;

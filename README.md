@@ -4,7 +4,7 @@ A package é um gerenciamento de estado [efêmero](https://docs.flutter.dev/deve
 - Não precisa usar annotations para indicar que é uma variável mutável ou observável.
 - Não precisa usar gerador de código.
 - Os widgets StateSetterBuilder e StateSetterBuilderKey são auto disposable.
-- A página que usa  o objeto ValueStream(Streamcontroller) pode ser disposed usando um gerenciador de dependência, uma página StatefulWidget >> void dispose() ou uma página StatelessWidget >> WillPopScope >> Navigator.maybePop(context).
+- A página que usa  o objeto ValuesStream(Streamcontroller) pode ser disposed usando um gerenciador de dependência, uma página StatefulWidget >> void dispose() ou uma página StatelessWidget >> WillPopScope >> Navigator.maybePop(context).
 - Segundo a documentação da framework, ao usarmos um widget com um valor mutável totalmente isolada, que re-builda apenas o necessário, temos uma performance mais [otimizada]( https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html#performance-considerations) na renderização dos componentes da árvore de widgets.
 - Dentro da pasta example da package tem 4 exemplos de uso mais detalhado.
 
@@ -13,7 +13,7 @@ A package é um gerenciamento de estado [efêmero](https://docs.flutter.dev/deve
 ```dart
 // Métodos e atributos de controle
 class PageStateSetterBuilderController {
-  final ValueState<int> counter = ValueState<int>(0);
+  final ValuesState<int> counter = ValuesState<int>(0);
 
   void increment() => counter.value++;
 
@@ -70,8 +70,8 @@ StateSetterBuilderKey<PageStateSetterBuilderKeyController>(
 ## Usando o widget StreamBuilder
 ```dart
 // Métodos e atributos de controle
-class PageValueStreamController implements DisposeValueStream {
-  final ValueStream<int> counter = ValueStream<int>(0);
+class PageValueStreamController implements DisposeValuesStream {
+  final ValuesStream<int> counter = ValuesStream<int>(0);
 
   void incrementCounter() => counter.value++;
   void decrementCounter() => counter.value--;
@@ -156,7 +156,7 @@ class HomePage extends StatelessWidget {
 
 class Controller {
 
-  final ValueState<int> counter = ValueState<int>(0);
+  final ValuesState<int> counter = ValuesState<int>(0);
 
   void increment() => counter.value++;
 

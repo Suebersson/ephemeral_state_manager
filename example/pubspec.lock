@@ -50,13 +50,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
+  dart_dev_utils:
+    dependency: transitive
+    description:
+      name: dart_dev_utils
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   ephemeral_state_manager:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.5"
   fake_async:
     dependency: transitive
     description:
