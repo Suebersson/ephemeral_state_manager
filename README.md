@@ -4,12 +4,16 @@ A package é um gerenciamento de estado [efêmero](https://docs.flutter.dev/deve
 - Não precisa usar annotations para indicar que é uma variável mutável ou observável.
 - Não precisa usar gerador de código.
 - Os widgets StateSetterBuilder e StateSetterBuilderKey são auto disposable.
-- A página que usa  o objeto ValuesStream(Streamcontroller) pode ser disposed usando um gerenciador de dependência, uma página StatefulWidget >> void dispose() ou uma página StatelessWidget >> WillPopScope >> Navigator.maybePop(context).
+- A página que usar o objeto ValuesStream(Streamcontroller) pode ser disposado usando um gerenciador de dependência, uma página StatefulWidget >> void dispose() ou uma página StatelessWidget >> WillPopScope >> Navigator.maybePop(context).
 - Segundo a documentação da framework, ao usarmos um widget com um valor mutável totalmente isolada, que re-builda apenas o necessário, temos uma performance mais [otimizada]( https://api.flutter.dev/flutter/widgets/StatefulWidget-class.html#performance-considerations) na renderização dos componentes da árvore de widgets.
 - Dentro da pasta example da package tem 4 exemplos de uso mais detalhado.
 
 
-## Usando o widget StateSetterBuilder
+<br />
+<br />
+
+
+### Usando o widget StateSetterBuilder
 ```dart
 // Métodos e atributos de controle
 class PageStateSetterBuilderController {
@@ -33,10 +37,11 @@ StateSetterBuilder<int>(
 ),
 ```
 
+<br />
+<br />
 
 
-
-## Usando o widget StateSetterBuilderKey
+### Usando o widget StateSetterBuilderKey
 ```dart
 // Métodos e atributos de controle
 class PageStateSetterBuilderKeyController extends StateSetterValues {
@@ -65,12 +70,14 @@ StateSetterBuilderKey<PageStateSetterBuilderKeyController>(
 ```
 
 
+<br />
+<br />
 
 
-## Usando o widget StreamBuilder
+### Usando o widget StreamBuilder
 ```dart
 // Métodos e atributos de controle
-class PageValueStreamController implements DisposeValuesStream {
+class PageValueStreamController extends Disposeble {
   final ValuesStream<int> counter = ValuesStream<int>(0);
 
   void incrementCounter() => counter.value++;
@@ -95,12 +102,14 @@ StreamBuilder<int>(
 ```
 
 
+<br />
+<br />
 
 
-## Exemplo de uso completo
+### Exemplo de uso completo
 ```dart
 import 'package:flutter/material.dart';
-import 'package:ephemeral_state_manager/src/stateSetterBuilder.dart';
+import 'package:ephemeral_state_manager/ephemeral_state_manager.dart';
 
 void main() => runApp(const MyApp());
 
@@ -117,14 +126,18 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-
-  final Controller controller = Controller();
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+  
+    final Controller controller = Controller();
+
     print('Create HomaPage build');
     return Scaffold(
-      appBar: AppBar(title: Text('Exemplo de uso StateSetterBuilder')),
+      appBar: AppBar(
+        title: const Text('Exemplo de uso StateSetterBuilder')
+      ),
       body: Center(
         child: Row(
            mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -156,7 +169,7 @@ class HomePage extends StatelessWidget {
 
 class Controller {
 
-  final ValuesState<int> counter = ValuesState<int>(0);
+  final ValueState<int> counter = ValueState<int>(0);
 
   void increment() => counter.value++;
 

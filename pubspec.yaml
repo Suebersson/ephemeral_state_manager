@@ -1,8 +1,8 @@
 name: ephemeral_state_manager
-description: Package simplificado para gerenciamento de estado efêmoro para widgets
-version: 1.0.5
-homepage: https://github.com/Suebersson/ephemeral_state_manager
-repository: https://github.com/Suebersson/ephemeral_state_manager.git
+description: Package simplificado para gerenciamento de estado efêmoro para widgets.
+version: 1.0.6
+homepage: https://github.com/Suebersson/ephemeral_state_manager.git
+repository: https://github.com/Suebersson/ephemeral_state_manager
 
 
 # Comandos para atulizar o repositório no github
@@ -20,7 +20,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dart_dev_utils: ^1.0.4
+  dart_dev_utils: ^1.1.0
   
 dev_dependencies:
   flutter_test:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dart_dev_utils/dart_dev_utils.dart' show Disposeble;
 import 'package:ephemeral_state_manager/ephemeral_state_manager.dart';
 
 /// Exemplo de uma página que discarta[dispose] a controller[Stream] sem usar uma [StatefulWidget]
@@ -15,7 +16,7 @@ class PageValueStreamWillPopScope extends StatelessWidget {
       appBar: AppBar(
         title: const Text('PageValueStream: usando StreamController'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios), 
+          icon: const Icon(Icons.arrow_back_ios), 
           onPressed: (){
             Navigator.maybePop(context);
           },
@@ -61,7 +62,9 @@ class PageValueStreamWillPopScope extends StatelessWidget {
             ),
             const Padding(
               padding: EdgeInsets.only(top: 40.0),
-              child: const Text('Está página(StatelessWidget) usa o widget WillPopScope para disposar a controller sem precisar uma StatefulWidget'),
+              child: Text(
+                'Está página(StatelessWidget) usa o widget WillPopScope para disposar a controller sem precisar uma StatefulWidget'
+              ),
             ),
           ],
         ),
@@ -70,7 +73,8 @@ class PageValueStreamWillPopScope extends StatelessWidget {
   }
 }
 
-class PageValueStreamWillPopScopeController implements DisposeValuesStream {
+class PageValueStreamWillPopScopeController extends Disposeble {
+
   final ValuesStream<int> counter = ValuesStream<int>(0);
 
   void incrementCounter() => counter.value++;
@@ -78,4 +82,5 @@ class PageValueStreamWillPopScopeController implements DisposeValuesStream {
 
   @override
   void dispose() => counter.dispose();
+
 }

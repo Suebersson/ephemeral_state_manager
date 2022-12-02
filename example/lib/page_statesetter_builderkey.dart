@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ephemeral_state_manager/ephemeral_state_manager.dart';
-import 'PageValueStream.dart';
+import 'page_value_stream.dart';
 
 class PageStateSetterBuilderKey extends StatelessWidget {
   const PageStateSetterBuilderKey({Key? key, required this.controller})

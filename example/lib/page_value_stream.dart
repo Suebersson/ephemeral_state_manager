@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:dart_dev_utils/dart_dev_utils.dart' show Disposeble;
 import 'package:ephemeral_state_manager/ephemeral_state_manager.dart';
 
-import './pageValueStreamWillPopScope.dart';
+import 'page_value_stream_willpop_scope.dart';
 
 class PageValueStream extends StatefulWidget {
   const PageValueStream({Key? key}) : super(key: key);
@@ -85,7 +86,8 @@ class _HomePageState extends State<PageValueStream> {
   }
 }
 
-class PageValueStreamController implements DisposeValuesStream {
+class PageValueStreamController extends Disposeble {
+
   final ValuesStream<int> counter = ValuesStream<int>(0);
 
   void incrementCounter() => counter.value++;
@@ -93,4 +95,5 @@ class PageValueStreamController implements DisposeValuesStream {
 
   @override
   void dispose() => counter.dispose();
+  
 }

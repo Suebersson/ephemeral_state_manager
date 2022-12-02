@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ephemeral_state_manager/ephemeral_state_manager.dart';
-import 'PageStateSetterBuilderKey.dart';
+import 'page_statesetter_builderkey.dart';
 
 class PageStateSetterBuilder extends StatelessWidget {
   const PageStateSetterBuilder({Key? key, required this.controller})

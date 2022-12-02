@@ -47,7 +47,10 @@ class _StateSetterBuilderState<T> extends State<StateSetterBuilder<T>> {
   }
 
   @override
-  void dispose() => super.dispose();
+  void dispose() {
+    super.dispose();
+    widget.valueStateSetter._setState = null;
+  }
 
   @override
   Widget build(BuildContext context) =>
@@ -55,7 +58,7 @@ class _StateSetterBuilderState<T> extends State<StateSetterBuilder<T>> {
 }
 
 class ValueState<T> {
-  final T _initialValue;
+  late final T _initialValue;
   ValueState(this._initialValue);
 
   T? _dataValue;
@@ -75,3 +78,75 @@ class ValueState<T> {
     }
   }
 }
+
+// Exemplo de uso
+/*
+import 'package:flutter/material.dart';
+import './ephemeralStateManager/stateSetterBuilder.dart';
+
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({ Key? key }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "App",
+      theme: ThemeData(primaryColor: Colors.indigo),
+      home: HomePage(),    
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+  
+    final Controller controller = Controller();
+
+    print('Create HomaPage build');
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Exemplo de uso StateSetterBuilder')
+      ),
+      body: Center(
+        child: Row(
+           mainAxisAlignment: MainAxisAlignment.spaceAround,
+           children: [
+             IconButton(
+               icon: Icon(Icons.exposure_neg_1, size: 45.0, color: Theme.of(context).primaryColor), 
+               onPressed: controller.decrement,
+             ),
+             StateSetterBuilder<int>(
+               valueStateSetter: controller.counter,
+               builder: (context, value){
+                 print('Upadate: counter');
+                 return Text(
+                   '$value',
+                   style: Theme.of(context).textTheme.headline4,
+                 );
+               }
+             ),
+             IconButton(
+               icon: Icon(Icons.exposure_plus_1, size: 45.0, color: Theme.of(context).primaryColor), 
+               onPressed: controller.increment,
+             ),
+           ],
+         ),
+      ),
+    );
+  }
+}
+
+class Controller {
+
+  final ValueState<int> counter = ValueState<int>(0);
+
+  void increment() => counter.value++;
+
+  void decrement() => counter.value--;
+
+}
+*/

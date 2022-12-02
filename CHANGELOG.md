@@ -9,3 +9,5 @@
 ## 1.0.4 correções
 
 ## 1.0.5 correções para funcionar na plataforma web
+
+## 1.0.6 manutenção
