@@ -11,3 +11,5 @@
 ## 1.0.5 correções para funcionar na plataforma web
 
 ## 1.0.6 manutenção
+
+## 1.0.7 melhorias

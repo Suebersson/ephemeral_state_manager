@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:dart_dev_utils/dart_dev_utils.dart' show printLog;
 
 /// O nome [StateSetterBuilderKey] significa que é um widget do tipo [StatefulWidget], que re-builda
 /// o widget usando a função do tipo [StateSetter] ou pelo nome mais popular [setState]
@@ -54,11 +55,12 @@ class _StateSetterBuilderKeyState<T> extends State<StateSetterBuilderKey<T>> {
   void initState() {
     super.initState();
 
-    /// adicionando a chave [String] e a função [setState] na variável [stateSetters]
+    // adicionando a chave [String] e a função [setState] na variável [stateSetters]
     if (!StateSetterValues._stateSetters.containsKey(widget.stateSetterKey)) {
       StateSetterValues._stateSetters[widget.stateSetterKey] = super.setState;
     } else {
-      throw "Chave já existente";
+      // throw "Chave já existente";
+      printLog('Chave já existente', name: 'StateSetterBuilderKey');
     }
   }
 
@@ -85,11 +87,13 @@ abstract class StateSetterValues {
   @visibleForTesting
   void updateValue<T>({required String stateSetterKey, required T data}) {
     if (_stateSetters.containsKey(stateSetterKey)) {
+      // Chamar a [setState]
       _stateSetters[stateSetterKey]!(() => data);
-
-      /// Chamar a [setState]
     } else {
-      throw "A chave de atualização para chamar a função StateSetter não foi encontrada";
+      // throw 'A chave de atualização para chamar a função StateSetter não foi encontrada';
+      printLog(
+          'A chave de atualização para chamar a função StateSetter não foi encontrada',
+          name: 'StateSetterValues');
     }
   }
 }

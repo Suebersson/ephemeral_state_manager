@@ -1,6 +1,6 @@
 name: ephemeral_state_manager
 description: Package simplificado para gerenciamento de estado efêmoro para widgets.
-version: 1.0.6
+version: 1.0.7
 homepage: https://github.com/Suebersson/ephemeral_state_manager.git
 repository: https://github.com/Suebersson/ephemeral_state_manager
 

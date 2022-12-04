@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:dart_dev_utils/dart_dev_utils.dart' show printLog;
 
 /// O nome [StateSetterBuilder] significa que é um widget do tipo [StatefulWidget], que re-builda
 /// o widget usando a função do tipo [StateSetter] ou pelo nome mais popular [setState]
@@ -74,7 +75,11 @@ class ValueState<T> {
         _setState!(() => _dataValue);
       }
     } else {
-      throw 'Não existe um estado para chamar a função setState';
+      // throw 'Não existe um estado para chamar a função setState';
+      printLog(
+        'Não existe um estado para chamar a função setState',
+        name: 'ValueState',
+      );
     }
   }
 }
