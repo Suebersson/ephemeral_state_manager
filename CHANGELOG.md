@@ -13,3 +13,5 @@
 ## 1.0.6 manutenção
 
 ## 1.0.7 melhorias
+
+## 1.0.8 Implementação da instância [ValuesStream.broadcast] 

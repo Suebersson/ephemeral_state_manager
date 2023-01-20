@@ -56,14 +56,14 @@ packages:
       name: dart_dev_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.1.2"
   ephemeral_state_manager:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "1.0.7"
+    version: "1.0.8"
   fake_async:
     dependency: transitive
     description:
