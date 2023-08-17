@@ -10,7 +10,7 @@ class PageStateSetterBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Create HomaPage build');
+    //print('Create HomaPage build');
     return Scaffold(
       appBar: AppBar(
         title: const Text('PageStateSetterBuilder: usando setState'),
@@ -29,10 +29,10 @@ class PageStateSetterBuilder extends StatelessWidget {
               StateSetterBuilder<int>(
                   valueStateSetter: controller.counter,
                   builder: (context, value) {
-                    print('Upadate: counter');
+                    //print('Upadate: counter');
                     return Text(
                       '$value',
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                     );
                   }
                 ),

@@ -49,8 +49,8 @@ class _StateSetterBuilderState<T> extends State<StateSetterBuilder<T>> {
 
   @override
   void dispose() {
-    super.dispose();
     widget.valueStateSetter._setState = null;
+    super.dispose();
   }
 
   @override
@@ -59,26 +59,33 @@ class _StateSetterBuilderState<T> extends State<StateSetterBuilder<T>> {
 }
 
 class ValueState<T> {
-  late final T _initialValue;
-  ValueState(this._initialValue);
+  ValueState(this._initialValue, {this.rebuildEqualValue = false});
 
-  T? _dataValue;
+  late final T _initialValue;
+
+  /// rebuildar a widget se o novo valor igual ao valor anterior
+  final bool rebuildEqualValue;
+
+  T? _currentValue;
 
   StateSetter? _setState;
 
-  T get value => _dataValue ?? _initialValue;
+  T get value => _currentValue ?? _initialValue;
 
   set value(T newValue) {
     if (_setState != null) {
-      if (newValue != _dataValue) {
-        _dataValue = newValue;
-        _setState!(() => _dataValue);
+      if (newValue != _currentValue) {
+        _currentValue = newValue;
+        _setState!(() => _currentValue);
+      } else if (rebuildEqualValue) {
+        _currentValue = newValue;
+        _setState!(() => _currentValue);
       }
     } else {
       // throw 'Não existe um estado para chamar a função setState';
       printLog(
         'Não existe um estado para chamar a função setState',
-        name: 'ValueState',
+        name: 'ValueState > value',
       );
     }
   }

@@ -11,7 +11,7 @@ class PageValueStreamWillPopScope extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Create HomaPage build');
+    //print('Create HomaPage build');
     return Scaffold(
       appBar: AppBar(
         title: const Text('PageValueStream: usando StreamController'),
@@ -24,7 +24,7 @@ class PageValueStreamWillPopScope extends StatelessWidget {
       ),
       body: WillPopScope(
         onWillPop: () async{
-          print('---- controller disposed ----');
+          //print('---- controller disposed ----');
           controller.dispose();
           return true;
         },
@@ -46,10 +46,10 @@ class PageValueStreamWillPopScope extends StatelessWidget {
                   stream: controller.counter.stream,
                   initialData: controller.counter.value,
                   builder: (context, snapshot){
-                    print('Upadate: ${snapshot.data}');
+                    //print('Upadate: ${snapshot.data}');
                     return Text(
                       '${snapshot.data}',
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                     );
                   },
                 ),
