@@ -17,3 +17,5 @@
 ## 1.0.8 Implementação da instância [ValuesStream.broadcast] 
 
 ## 1.0.9 Implementação da propriedade [rebuildEqualValue] dentro da instância de [ValueState]
+
+## 1.1.0 Atulização dart
