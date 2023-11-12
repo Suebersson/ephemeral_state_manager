@@ -19,3 +19,5 @@
 ## 1.0.9 Implementação da propriedade [rebuildEqualValue] dentro da instância de [ValueState]
 
 ## 1.1.0 Atulização dart
+
+## 1.1.1 Implementação do método [update] dentro de classe [ValueState]

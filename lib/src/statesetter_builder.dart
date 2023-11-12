@@ -61,7 +61,7 @@ class _StateSetterBuilderState<T> extends State<StateSetterBuilder<T>> {
 class ValueState<T> {
   ValueState(this._initialValue, {this.rebuildEqualValue = false});
 
-  late final T _initialValue;
+  final T _initialValue;
 
   /// rebuildar a widget se o novo valor igual ao valor anterior
   final bool rebuildEqualValue;
@@ -73,21 +73,32 @@ class ValueState<T> {
   T get value => _currentValue ?? _initialValue;
 
   set value(T newValue) {
-    if (_setState != null) {
+    if (_setState is StateSetter) {
       if (newValue != _currentValue) {
-        _currentValue = newValue;
-        _setState!(() => _currentValue);
+        _setState!(() => _currentValue = newValue);
       } else if (rebuildEqualValue) {
-        _currentValue = newValue;
-        _setState!(() => _currentValue);
+        _setState!(() => _currentValue = newValue);
       }
     } else {
-      // throw 'Não existe um estado para chamar a função setState';
-      printLog(
-        'Não existe um estado para chamar a função setState',
-        name: 'ValueState > value',
-      );
+      _notification();
     }
+  }
+
+  void update() {
+    if (_setState is StateSetter) {
+      _setState!(
+        () {},
+      );
+    } else {
+      _notification();
+    }
+  }
+
+  void _notification() {
+    printLog(
+      'Não existe um estado para chamar a função setState',
+      name: '$runtimeType',
+    );
   }
 }
 
