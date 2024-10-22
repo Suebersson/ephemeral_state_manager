@@ -21,7 +21,6 @@ import 'package:dart_dev_utils/dart_dev_utils.dart' show printLog;
 ///   re-builda apenas o necessário, temos uma performace mais otimizada na renderização dos
 ///   componentes da árvore de widgets
 
-@immutable
 class StateSetterBuilder<T> extends StatefulWidget {
   /// Criar um widget mutável que será atulizado através
   /// de uma função [StateSetter] ou [setState] sem re-buildar toda árvore de widgets
@@ -30,7 +29,7 @@ class StateSetterBuilder<T> extends StatefulWidget {
   /// quanto para gerenciamento de [Estado do aplicativo](estado com dependências fixas)
   /// Para mais informações acesse:
   /// https://flutter.dev/docs/development/data-and-backend/state-mgmt/ephemeral-vs-app
-  final ValueState valueStateSetter;
+  final ValueState<T> valueStateSetter;
   final Widget Function(BuildContext, T) builder;
   const StateSetterBuilder(
       {Key? key, required this.valueStateSetter, required this.builder})
@@ -74,9 +73,7 @@ class ValueState<T> {
 
   set value(T newValue) {
     if (_setState is StateSetter) {
-      if (newValue != _currentValue) {
-        _setState!(() => _currentValue = newValue);
-      } else if (rebuildEqualValue) {
+      if (newValue != _currentValue || rebuildEqualValue) {
         _setState!(() => _currentValue = newValue);
       }
     } else {
@@ -86,9 +83,7 @@ class ValueState<T> {
 
   void update() {
     if (_setState is StateSetter) {
-      _setState!(
-        () {},
-      );
+      _setState!(() {});
     } else {
       _notification();
     }

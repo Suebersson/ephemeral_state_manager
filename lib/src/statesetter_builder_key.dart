@@ -26,7 +26,6 @@ import 'package:dart_dev_utils/dart_dev_utils.dart' show printLog;
 ///   re-builda apenas o necessário, temos uma performace mais otimizada na renderização dos
 ///   componentes da árvore de widgets
 
-@immutable
 class StateSetterBuilderKey<T> extends StatefulWidget {
   /// Criar um widget mutavel que será atulizado através
   /// de uma função [StateSetter] ou [setState] sem re-buildar toda árvore de widgets
